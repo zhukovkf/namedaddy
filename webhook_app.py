@@ -70,7 +70,10 @@ def main():
 
     app.router.add_get("/", _health)
 
-    dp.startup.register(lambda: on_startup(bot, base_url))
+    async def _on_startup():
+        await on_startup(bot, base_url)
+
+    dp.startup.register(_on_startup)
 
     web.run_app(app, host="0.0.0.0", port=port)
 
