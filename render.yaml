@@ -1,0 +1,15 @@
+# Render "Blueprint" — при импорте репозитория Render сам предложит
+# создать сервис по этому файлу (New -> Blueprint). Можно и без него,
+# просто выбрать New -> Web Service и указать команды вручную (см. README).
+services:
+  - type: web
+    name: trademark-bot
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt && python load_sample.py"
+    startCommand: "python webhook_app.py"
+    envVars:
+      - key: BOT_TOKEN
+        sync: false   # впишете значение в Render Dashboard, не в этом файле
+      - key: PYTHON_VERSION
+        value: 3.11.0
